@@ -1,10 +1,26 @@
 import React from 'react'
+import { ArticleProps } from '../../helpers/interfaces'
+import { ListItem, ListItemText, Card } from '@mui/material'
 
-const Article = () => {
+const Article: React.FC<ArticleProps> = ({art}) => {
     return (
-        <div>Article</div>
-    )
+			<ListItem>
+				<Card variant="outlined" sx={{ mb: '10px' }}>
+					<a href={art.url} style={{ textDecoration: 'none' }} target='_blank'>
+                    {/* obrazek i tytuł artykułu */}
+                    <img src={art.urlToImage} alt={art.title} style={{ width: '100%' }} />
+                    <ListItemText sx={{color: 'black'}}>
+                        {art.title}
+                    </ListItemText>
+					</a>
+				</Card>
+			</ListItem>
+		);
 }
+
+// stylowanie inline
+// sx do komponentów z MUI
+// style do elementów z HTMLa
 
 export default Article
 

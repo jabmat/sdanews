@@ -4,6 +4,7 @@ import axios from 'axios';
 import { API_KEY } from '../../helpers/helpers';
 import { Typography, List } from '@mui/material';
 import Article from '../Article/Article';
+import { ArticleObj } from '../../helpers/interfaces';
 
 const HomePage = () => {
 	// zad. 2 - rozwiązanie
@@ -71,15 +72,34 @@ const HomePage = () => {
 	// return  <Typography variant='h2' align='center' fontSize= '.8'>Today's hottest news:</Typography>;
 
     return (
-        <>
-            <Typography variant='h2' align='center' sx={{ fontSize: '2rem', my: '.8rem' }}>Today's hottest news:</Typography>
-            
-            <List sx={{ width: '100%', alignContent: 'center' }}></List>
-		</>
-		
-		
-		
-    );
+			<>
+				<Typography
+					variant="h2"
+					align="center"
+					sx={{ fontSize: '2rem', my: '.8rem' }}>
+					Today's hottest news:
+				</Typography>
+
+				<List sx={{ width: '100%', alignContent: 'center' }}>
+					{/* feature w liście */}
+					{/* {[<li>123</li>, <li>312</li>, <li>321</li>]} */}
+
+				
+
+					{todaysArticles.length !== 0 && todaysArticles.map((article: ArticleObj) => {
+							return <Article art={article} key={article.title} />;
+					})}
+				
+
+
+				</List>
+				{/* wyświetlenie componentu Art w HomePage */}
+				{/* do zapamiętania: renderowanie warunkowe */}
+				{/* {todaysArticles.length !== 0 && (
+					<Article art={todaysArticles[0]} key={1} />
+				)} */}
+			</>
+		);
 };
 
 export default HomePage;

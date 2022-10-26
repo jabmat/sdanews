@@ -11,6 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import {Link} from 'react-router-dom'
 
 const pages = ['Home', 'Search'];
 
@@ -82,16 +83,17 @@ const Navbar = () => {
 							letterSpacing: '.3rem',
 							color: 'inherit',
 							textDecoration: 'none',
-                        }}>
-                        {/*  */}
+						}}>
+						{/*  */}
 						SDA NEWS
 					</Typography>
-				
 
 					<Box sx={{ flexGrow: 0 }}>
-							<IconButton  sx={{ p: 0 }}>
+						<Link to="/login">
+							<IconButton sx={{ p: 0 }}>
 								<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
 							</IconButton>
+						</Link>
 					</Box>
 				</Toolbar>
 			</Container>
