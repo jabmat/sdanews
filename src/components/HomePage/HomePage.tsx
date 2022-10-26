@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { API_KEY } from '../../helpers/helpers';
 import { Typography, List } from '@mui/material';
+import Article from '../Article/Article';
 
 const HomePage = () => {
 	// zad. 2 - rozwiązanie
@@ -74,7 +75,10 @@ const HomePage = () => {
             <Typography variant='h2' align='center' sx={{ fontSize: '2rem', my: '.8rem' }}>Today's hottest news:</Typography>
             
             <List sx={{ width: '100%', alignContent: 'center' }}></List>
-        </>
+		</>
+		
+		
+		
     );
 };
 
