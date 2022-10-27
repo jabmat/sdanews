@@ -5,14 +5,21 @@ import { Typography, TextField, Button, Card } from '@mui/material';
 // customowy hook useForm:
 import { useForm } from 'react-hook-form';
 import { RegisterFormData } from '../../helpers/interfaces';
-
-
+import { app, auth, database } from '../../firebaseConfig'
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const RegisterPage = () => {
     const { register, handleSubmit } = useForm<RegisterFormData>();
 
-    const registerUser = (data: RegisterFormData) => {
-			console.log(data);
+    const registerUser = ({email, password, password2}:RegisterFormData) => {
+        if (password === password2) {
+            createUserWithEmailAndPassword(auth, email, password).then(() => console.log('Succesfully registered a user')).catch((err) => console.error(err.message));
+        } else {
+            alert('Passwords are not equal!')
+        }
+        
+        
+        // console.log(data);
 			// zad.2 27.10.22
 			// treść
 			// NIE UŻYWAJ LINKóW GSTATIC DO IMPORTOW Z FB, MOŻESZ UŻYC NP. firebase/app, firebase/auth
@@ -20,7 +27,7 @@ const RegisterPage = () => {
 			// 1. Sprawdź czy hasła się zgadzają (czy są identyczne)
 			// 2. Jeżeli tak, wywołaj odpowiednią funkcję firebase'ową i zarejestruj użytkownika
 			// 3. Do tej funkcji (pkt 2) podepnij thena, w nim console.log('success') i do tego catch console.log(error)
-        
+            
         
 		};
 
