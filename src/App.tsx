@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar/Navbar';
 import HomePage from './components/HomePage/HomePage';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import RegisterPage from './components/RegisterPage/RegisterPage';
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePage />} />
           {/* <Route path='/login' element={<p>Login Page</p>} /> */}
-          
+          <Route path='/register' element={<RegisterPage />} />
         </Routes>
 
 				{/* komponenty, które mają się wyświetlać cały czas, np footer */}
