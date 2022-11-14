@@ -9,8 +9,13 @@ export interface ArticleProps {
     key: string;
 }
 
-export interface RegisterFormData {
+
+
+export interface LoginFormData {
     email: string;
     password: string;
-    password2: string;
+}
+
+export interface RegisterFormData extends LoginFormData {
+	password2: string;
 }
