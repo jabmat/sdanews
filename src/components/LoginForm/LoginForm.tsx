@@ -63,3 +63,15 @@ export default LoginForm;
 // W tej funkcji:
 // 8. Wywołaj funkcję signInWithEmailAndPassword (z Firebase) z odpowiednimi argumentami
 // 9. Podepnij pod funkcje z pkt 8 thena z console.log('success') i catcha gdzie wyswietlisz blad w konsoli
+
+
+// Zad 2.
+// Treść
+// 1. Stwórz folder i plik LoginPage, w środku komponent
+// Równorzędnie wyświetlone w JSX:
+// - LoginForm
+// - Typography variant h6, w sx'ach: fontWeight 100, textAlign center. TextContent: Don't have an account yet? Register now!
+// - Link (RRD) to /register w style: textDecoration none
+// W środku Linka:
+// - Button variant outlined w sx'ach: display block, mx auto. TextContent Register
+// 2. W App.tsx, stwórz Route /login i wyświetl w nim LoginPage
