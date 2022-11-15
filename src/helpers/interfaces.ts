@@ -19,3 +19,7 @@ export interface LoginFormData {
 export interface RegisterFormData extends LoginFormData {
 	password2: string;
 }
+
+export interface NavbarProps {
+    loggedIn: boolean;
+}
