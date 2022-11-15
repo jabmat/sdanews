@@ -29,9 +29,7 @@ const UserPage: React.FC<UserPageProps> = ({ loggedIn }) => {
 							fontFamily: 'Roboto',
 							mx: 'auto',
 						}}>
-						{' '}
 						{auth.currentUser.email}
-						Your Profile
 					</Typography>
 					<Button
 						variant="outlined"
@@ -60,7 +58,6 @@ export default UserPage;
 // 6. Typography variant h5, align center, w sx'ach: fontSize 1rem, my 1rem, fontFamily Roboto, mx auto. TextContent: email aktualnie zalogowanego użytkownika (jest dostępny gdzieś w obiekcie auth)
 // 7. Button (MUI) variant outlined, w sx'ach: display block, mx auto, my 1rem. Po kliknięciu na button, wywołaj funkcję signOut (firebase/auth, przyjmuje jako argument obiekt auth). TextContent: Log out.
 // {x && y.z && <h1>123</h1>}
-
 
 // {
 // 	loggedIn ? (
