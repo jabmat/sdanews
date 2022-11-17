@@ -31,3 +31,7 @@ export interface ProfilePhotoFormData {
 export interface SearchFormData {
     keyword: string;
 }
+
+export interface SearchFormProps {
+    setKeyword: (value: string) => void;
+}
