@@ -1,11 +1,36 @@
 import { Button, Card, Typography } from '@mui/material';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { auth, storage } from '../../firebaseConfig';
+import { ProfilePhotoFormData } from '../../helpers/interfaces';
+import { ref, uploadBytes } from 'firebase/storage';
 
 const ProfilePhotoForm = () => {
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit } = useForm<ProfilePhotoFormData>();
 
-	const uploadPhoto = () => {};
+	const uploadPhoto = ({ profilePhotoList }: ProfilePhotoFormData) => {
+		// zad. 1 16.11
+		// treść
+		// 1. Parametr tej funkcji to obiekt data w którym zawarte będą dane z formularza, stwórz interface do tych danych, jedyne pole w tym interfejsie przyjmie typ FileList
+		// 2. Wyciągnij samo zdjęcie z FileListy do osobnej zmiennej
+		// 3. Sprawdź czy auth.currentUser jest prawdziwy (ifem)
+		// 4. W ifie ułóż referencje do storagu, użyj do tego funkcji ref (firebase/storage) ("users/{auth.currentUser.uid}/profilePhoto")
+		// 5. (w ifie) Wywołanie funkcji uploadBytes (firebase/storage), argumenty: referencja z pkt 4 i sam plik
+		// 6. (w ifie) Doklej thena z informacja o sukcesie i catcha z wyswietleniem errora
+
+		// wykonanie mj
+		const profilePhoto = profilePhotoList[0];
+
+		if (auth.currentUser) {
+			const storageRef = ref(
+				storage,
+				`/users/${auth.currentUser.uid}/profilePhoto`
+			);
+			uploadBytes(storageRef, profilePhoto)
+				.then(() => console.log('ok'))
+				.catch((err) => console.error(err.message));
+		}
+	};
 
 	return (
 		<form onSubmit={handleSubmit(uploadPhoto)}>
@@ -28,7 +53,7 @@ const ProfilePhotoForm = () => {
 					<input
 						hidden
 						type="file"
-						{...register('profilePhoto', { required: true })}
+						{...register('profilePhotoList', { required: true })}
 					/>
 				</Button>
 				<Button

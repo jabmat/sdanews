@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,11 +13,27 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import { NavbarProps } from '../../helpers/interfaces';
+import { auth, storage } from '../../firebaseConfig';
+import { ref, getDownloadURL } from 'firebase/storage';
 
 const pages = ['Home', 'Search'];
 
 const Navbar: React.FC<NavbarProps> = ({ loggedIn }) => {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+
+	const [profilePhoto, setProfilePhoto] = useState('/');
+
+	useEffect(() => {
+		if (loggedIn && auth.currentUser) {
+			const storageRef = ref(
+				storage,
+				`/users/${auth.currentUser.uid}/profilePhoto`
+			);
+			getDownloadURL(storageRef)
+				.then((url) => setProfilePhoto(url))
+				.catch((err) => console.error(err.message));
+		}
+	}, [loggedIn]);
 
 	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorElNav(event.currentTarget);
@@ -26,6 +42,20 @@ const Navbar: React.FC<NavbarProps> = ({ loggedIn }) => {
 	const handleCloseNavMenu = () => {
 		setAnchorElNav(null);
 	};
+
+	// zad. 2 16.11.22
+	// treść
+	// 1. Stwórz stan profilePhoto (useState), wartość początkowa: '/'
+	// 2. Wywołanie useEffect. Zapełniona lista dependencji, reaguj na zmiane loggedIn
+	// W UE:
+	// 3. Stwórz ifa w którym sprawdziś czy loggedIn jest prawdziwy i czy auth.currentUser jest prawdziwe.
+	// W ifie:
+	// 4. Stwórz refa (firebase/storage) do storagu (1:1 taki sam jak w poprzednim zadaniu)
+	// 5. Wywołanie funkcji getDownloadURL (firebase/storage), funkcja przyjmuje jako argument tylko ref do storagu (pkt 4)
+	// 6. Przypnij thena do funkcji z pkt 5, w thenie wpisz w parametr "url", po czym tego urla wrzuć do stanu profilePhoto
+	// .then((url) => setProfilePhoto(url))
+	// 7. Dopisz catcha
+	// 8. Wstaw stan profilePhoto w atrybut src Avatara
 
 	return (
 		<AppBar position="static">
@@ -108,7 +138,7 @@ const Navbar: React.FC<NavbarProps> = ({ loggedIn }) => {
 							{/* Renderowanie warunkowe: jeżeli loggedIn jest równe true, wyświetl IconButton (po prostu to co już jest), jeżeli loggedIn jest równy false, wyświetl Button (MUI), w sx'ach my 2, color white, display block. TextContent: Log in */}
 							{loggedIn ? (
 								<IconButton sx={{ p: 0 }}>
-									<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+									<Avatar alt="Remy Sharp" src={profilePhoto} />
 								</IconButton>
 							) : (
 								<Button sx={{ my: 2, color: 'white', display: 'block' }}>

@@ -23,3 +23,11 @@ export interface RegisterFormData extends LoginFormData {
 export interface NavbarProps {
     loggedIn: boolean;
 }
+
+export interface ProfilePhotoFormData {
+	profilePhotoList: FileList;
+}
+
+export interface SearchFormData {
+    keyword: string;
+}

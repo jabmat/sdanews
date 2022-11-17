@@ -8,6 +8,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebaseConfig';
 import { useState } from 'react';
 import UserPage from './components/UserPage/UserPage';
+import SearchPage from './components/SearchPage/SearchPage';
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -35,6 +36,7 @@ function App() {
 					{/* dorobić route na LoginPage */}
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/user" element={<UserPage loggedIn={loggedIn} />} />
+					<Route path='/search' element={<SearchPage />} />
 				</Routes>
 
 				{/* komponenty, które mają się wyświetlać cały czas, np footer */}
