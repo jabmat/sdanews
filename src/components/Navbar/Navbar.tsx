@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { authContext } from '../../helpers/authContext';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,12 +18,17 @@ import { NavbarProps } from '../../helpers/interfaces';
 import { auth, storage } from '../../firebaseConfig';
 import { ref, getDownloadURL } from 'firebase/storage';
 
+
+
 const pages = ['Home', 'Search'];
 
-const Navbar: React.FC<NavbarProps> = ({ loggedIn }) => {
+const Navbar = () => {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
 	const [profilePhoto, setProfilePhoto] = useState('/');
+
+	// używamy useContext zamiast przekazać propsa React.FC (usunięte)
+	const loggedIn = useContext(authContext);
 
 	useEffect(() => {
 		if (loggedIn && auth.currentUser) {

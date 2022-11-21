@@ -5,7 +5,14 @@ import { Typography, Button } from '@mui/material';
 import { signOut } from 'firebase/auth';
 import ProfilePhotoForm from '../ProfilePhotoForm/ProfilePhotoForm';
 
-const UserPage: React.FC<UserPageProps> = ({ loggedIn }) => {
+import { useState, useEffect, useContext } from 'react';
+import { authContext } from '../../helpers/authContext';
+
+
+const UserPage = () => {
+	// używamy useContext zamiast przekazać propsa React.FC (usunięte)
+	const loggedIn = useContext(authContext);
+
 	return (
 		<>
 			{loggedIn && auth.currentUser && (

@@ -9,6 +9,7 @@ import { auth } from './firebaseConfig';
 import { useState } from 'react';
 import UserPage from './components/UserPage/UserPage';
 import SearchPage from './components/SearchPage/SearchPage';
+import { authContext } from './helpers/authContext';
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -24,21 +25,24 @@ function App() {
 	return (
 		<div className="App">
 			<BrowserRouter>
-				{/* tu komponenty które mają się wyświetlać cały czas */}
-				<Navbar loggedIn={loggedIn} />
+				<authContext.Provider value={loggedIn}>
+					{/* tu komponenty które mają się wyświetlać cały czas */}
+					{/* usunięto Propsa z Navbara po użyciu useContext: */}
+					<Navbar />
 
-				{/* tu komponenty, które będą się pojawiać i znikać (podstrony, które będą się przełączać) */}
+					{/* tu komponenty, które będą się pojawiać i znikać (podstrony, które będą się przełączać) */}
 
-				<Routes>
-					<Route path="/" element={<HomePage />} />
-					{/* <Route path='/login' element={<p>Login Page</p>} /> */}
-					<Route path="/register" element={<RegisterPage />} />
-					{/* dorobić route na LoginPage */}
-					<Route path="/login" element={<LoginPage />} />
-					<Route path="/user" element={<UserPage loggedIn={loggedIn} />} />
-					<Route path='/search' element={<SearchPage />} />
-				</Routes>
+					<Routes>
+						<Route path="/" element={<HomePage />} />
+						{/* <Route path='/login' element={<p>Login Page</p>} /> */}
+						<Route path="/register" element={<RegisterPage />} />
+						{/* dorobić route na LoginPage */}
+						<Route path="/login" element={<LoginPage />} />
 
+						<Route path="/user" element={<UserPage />} />
+						<Route path="/search" element={<SearchPage />} />
+					</Routes>
+				</authContext.Provider>
 				{/* komponenty, które mają się wyświetlać cały czas, np footer */}
 			</BrowserRouter>
 		</div>
